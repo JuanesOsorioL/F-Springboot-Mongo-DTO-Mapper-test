@@ -14,9 +14,10 @@ public class Recurso {
     @Id
     private String id;
     private String nombre;
-    private boolean Disponible = true;
+    private boolean disponible = true;
     private Date fechaPrestamo;
     private AreaTematica areaTematica;
+
     private TipoRecurso tipoRecurso;
 
     public Recurso() {
@@ -26,6 +27,14 @@ public class Recurso {
         this.nombre = nombre;
         this.areaTematica = areaTematica;
         this.tipoRecurso = tipoRecurso;
+    }
+
+    public Recurso(String id, String nombre, AreaTematica areaTematica, TipoRecurso tipoRecurso, Boolean Disponible) {
+        this.id=id;
+        this.nombre = nombre;
+        this.areaTematica = areaTematica;
+        this.tipoRecurso = tipoRecurso;
+        this.disponible=Disponible;
     }
 
     public String getId() {
@@ -45,11 +54,11 @@ public class Recurso {
     }
 
     public boolean isDisponible() {
-        return Disponible;
+        return disponible;
     }
 
     public void setDisponible(boolean disponible) {
-        this.Disponible = disponible;
+        this.disponible = disponible;
     }
 
     public Date getFechaPrestamo() {

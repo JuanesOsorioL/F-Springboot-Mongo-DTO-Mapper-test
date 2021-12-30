@@ -32,26 +32,21 @@ public class Mensaje {
         this.mensaje = mensaje;
     }
 
-    public Mensaje imprimirDisponibilidad(Boolean disponible, Date fechaPrestamo) {
-        if(disponible){
-            return new Mensaje(true,  "El recurso esta disponible");
-        }else{
-            return new Mensaje(false,"El recurso fue prestado el: "+fechaPrestamo);
-        }
+    public Mensaje printAvailability(Boolean disponible, Date fechaPrestamo) {
+        return disponible ?
+                new Mensaje(true,"El recurso esta disponible"):
+                new Mensaje(false,"El recurso fue prestado el: "+fechaPrestamo);
     }
 
-    public Mensaje imprimiPrestamo(Boolean disponible, Date fechaPrestamo) {
-        if(disponible){
-            return new Mensaje(true,  "El recurso esta disponible");
-        }else{
-            return new Mensaje(false,"El recurso fue prestado el: "+fechaPrestamo);
-        }
+    public Mensaje printLoan(Boolean disponible, Date fechaPrestamo) {
+        return disponible ?
+                new Mensaje(true,  "El recurso esta disponible"):
+                new Mensaje(false,"El recurso fue prestado el: "+fechaPrestamo);
     }
 
-    public Mensaje imprimirDevolucion(Boolean disponible , Date fechaPrestamo){
-        if(!disponible){
-            return new Mensaje(true,  "El recurso fue entregado con exito");
-        }
-        return new Mensaje(false,("El recurso no esta prestado" ));
+    public Mensaje printBack(Boolean disponible , Date fechaPrestamo){
+        return !disponible ?
+        new Mensaje(true,"El recurso fue entregado con exito"):
+        new Mensaje(false,("El recurso no esta prestado" ));
     }
 }

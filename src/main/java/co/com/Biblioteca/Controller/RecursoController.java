@@ -7,12 +7,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/Recursos")
 public class RecursoController {
 
     @Autowired
     RecursoService recursoService;
+
+    @GetMapping("")
+    public ResponseEntity<List<RecursoDto>> buscarTodos() {
+        return  new ResponseEntity(recursoService.findAll(),HttpStatus.OK);
+    }
 
     @PostMapping("/crear")
     public ResponseEntity<RecursoDto> create(@RequestBody RecursoDto recursoDto) {
@@ -21,22 +28,22 @@ public class RecursoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<RecursoDto> mostrarDisponibilidad(@PathVariable("id") String id) {
-        return new ResponseEntity(recursoService.ConsultarDisponibilidad(id), HttpStatus.OK);
+        return new ResponseEntity(recursoService.findByAvailability(id), HttpStatus.OK);
     }
 
     @PutMapping("/prestar/{id}")
     public ResponseEntity<RecursoDto> prestar(@PathVariable String id) {
-        return new ResponseEntity(recursoService.PrestarUnRecurso(id), HttpStatus.OK);
+        return new ResponseEntity(recursoService.lendRecurso(id), HttpStatus.OK);
 
     }
     @PutMapping("/devolver/{id}")
     public ResponseEntity<RecursoDto> devolver(@PathVariable String id) {
-        return new ResponseEntity(recursoService.EntregarRecurso(id), HttpStatus.OK);
+        return new ResponseEntity(recursoService.backRecurso(id), HttpStatus.OK);
 
     }
 
     @DeleteMapping("/borrar/{id}")
-    public ResponseEntity delete(@PathVariable("id") String id) {
+    public ResponseEntity borrar(@PathVariable("id") String id) {
         try {
             recursoService.delete(id);
             return new ResponseEntity(HttpStatus.OK);
@@ -47,7 +54,7 @@ public class RecursoController {
     }
 
     @PostMapping("/buscar")
-    public ResponseEntity<RecursoDto> buscarTipoYArea(@RequestBody RecursoDto recursoDto) {
-        return new ResponseEntity(recursoService.buscarAreaYTipo(recursoDto), HttpStatus.OK);
+    public ResponseEntity<List<RecursoDto>> buscarPorTipoYArea(@RequestBody RecursoDto recursoDto) {
+        return new ResponseEntity(recursoService.findByAreaTipo(recursoDto), HttpStatus.OK);
     }
 }

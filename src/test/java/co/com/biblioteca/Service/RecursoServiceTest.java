@@ -23,7 +23,7 @@ class RecursoServiceTest {
     @Test
     @DisplayName("Test findAll Success")
     public void prestarRecurso() {
-    //var recurso1=new Recurso
+
     }
 
 }
