@@ -19,15 +19,16 @@ public class RecursoService {
     RecursoRepository recursoRepository;
     RecursoMapper mapper = new RecursoMapper();
 
+    public List<RecursoDto> findAll(){
+        return mapper.fromCollectionList(recursoRepository.findAll());
+    }
+
     public RecursoDto findById(String id){
         Recurso recurso = recursoRepository.findById(id).
                 orElseThrow(() -> new RuntimeException("Recurso no encontrado"));
         return mapper.fromCollection(recurso);
     }
 
-    public List<RecursoDto> findAll(){
-        return mapper.fromCollectionList(recursoRepository.findAll());
-    }
 
     /*public Boolean consultarEstado(String id){
         RecursoDto recurso = findById(id);
@@ -41,13 +42,16 @@ public class RecursoService {
 
     public Mensaje lendRecurso(String id){
         RecursoDto recursoDto = findById(id);
+        var fecha=  new Date();
+        var mensaje = new Mensaje().printLoan(recursoDto.isDisponible(),fecha);
         if (recursoDto.isDisponible()){
             recursoDto.setDisponible(false);
             recursoDto.setFechaPrestamo(new Date());
             Recurso recurso = mapper.fromDTO(recursoDto);
             mapper.fromCollection(recursoRepository.save(recurso));
         }
-        return new Mensaje().printLoan(recursoDto.isDisponible(),recursoDto.getFechaPrestamo());
+        return mensaje;
+        //return new Mensaje().printLoan(recursoDto.isDisponible(),recursoDto.getFechaPrestamo());
     }
 
     public RecursoDto crear(RecursoDto recursoDto) {

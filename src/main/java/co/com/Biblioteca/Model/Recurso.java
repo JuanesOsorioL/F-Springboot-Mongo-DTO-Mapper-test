@@ -37,6 +37,15 @@ public class Recurso {
         this.disponible=Disponible;
     }
 
+    public Recurso(String id, String nombre, AreaTematica areaTematica, TipoRecurso tipoRecurso, Boolean Disponible,Date fechaPrestamo) {
+        this.id=id;
+        this.nombre = nombre;
+        this.areaTematica = areaTematica;
+        this.tipoRecurso = tipoRecurso;
+        this.disponible=Disponible;
+        this.fechaPrestamo=fechaPrestamo;
+    }
+
     public String getId() {
         return id;
     }

@@ -40,8 +40,9 @@ public class Mensaje {
 
     public Mensaje printLoan(Boolean disponible, Date fechaPrestamo) {
         return disponible ?
-                new Mensaje(true,  "El recurso esta disponible"):
-                new Mensaje(false,"El recurso fue prestado el: "+fechaPrestamo);
+                new Mensaje(true,"El recurso estaba disponible, y se te fue prestado el: "+fechaPrestamo):
+                new Mensaje(false,  "El recurso ya esta prestado");
+
     }
 
     public Mensaje printBack(Boolean disponible , Date fechaPrestamo){
