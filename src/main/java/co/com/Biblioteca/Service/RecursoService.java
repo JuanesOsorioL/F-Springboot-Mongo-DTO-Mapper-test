@@ -29,12 +29,6 @@ public class RecursoService {
         return mapper.fromCollection(recurso);
     }
 
-
-    /*public Boolean consultarEstado(String id){
-        RecursoDto recurso = findById(id);
-       return recurso.isDisponible();
-    }*/
-
     public Mensaje findByAvailability(String id){
         RecursoDto recursoDto = findById(id);
         return new Mensaje().printAvailability(recursoDto.isDisponible(),recursoDto.getFechaPrestamo());
@@ -51,7 +45,6 @@ public class RecursoService {
             mapper.fromCollection(recursoRepository.save(recurso));
         }
         return mensaje;
-        //return new Mensaje().printLoan(recursoDto.isDisponible(),recursoDto.getFechaPrestamo());
     }
 
     public RecursoDto crear(RecursoDto recursoDto) {
